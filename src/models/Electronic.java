@@ -9,4 +9,9 @@ public class Electronic extends Product {
     public boolean requiresShipping() {
         return true;
     }
+
+    @Override
+    public boolean isExpired() {
+        return false;
+    }
 }

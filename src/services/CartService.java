@@ -1,10 +1,12 @@
-
 package services;
 
 import models.Product;
+
 import entities.Customer;
 import java.util.ArrayList;
 import java.util.Scanner;
+import models.Food;
+import models.Electronic;
 
 public class CartService {
     private final Customer customer;
@@ -38,7 +40,17 @@ public class CartService {
         }
 
         selectedProduct.setQuantity(selectedProduct.getQuantity() - quantity);
-        Product cartProduct = new Product(selectedProduct.getName(), selectedProduct.getPrice(), quantity);
+
+        Product cartProduct;
+
+        if (selectedProduct instanceof models.Food foodProduct) {
+            cartProduct = new models.Food(foodProduct.getName(), foodProduct.getPrice(), quantity, false); // or copy isExpired
+        } else if (selectedProduct instanceof models.Electronic electronicProduct) {
+            cartProduct = new models.Electronic(electronicProduct.getName(), electronicProduct.getPrice(), quantity);
+        } else {
+            System.out.println("Unsupported product type.");
+            return;
+        }
         cart.add(cartProduct);
         System.out.println("Added to cart: " + cartProduct.getName() + " (x" + quantity + ")");
     }

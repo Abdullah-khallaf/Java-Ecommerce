@@ -3,6 +3,8 @@ package main;
 import java.util.Scanner;
 import java.util.ArrayList;
 import models.Product;
+import models.Food;
+import models.Electronic;
 
 
 public class Main {
@@ -12,15 +14,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to the E-commerce System");
 
-        System.out.println("Login as (1) Admin or (2) Customer:");
-        int role = scanner.nextInt();
-        if (role == 1) {
-            adminMenu(scanner);
-        } else if (role == 2) {
-            customerMenu(scanner);
-        } else {
-            System.out.println("Invalid role selection.");
+        while (true) {
+            System.out.println("\nLogin as (1) Admin or (2) Customer or (3) Exit:");
+            int role = scanner.nextInt();
+            if (role == 1) {
+                adminMenu(scanner);
+            } else if (role == 2) {
+                customerMenu(scanner);
+            } else if (role == 3) {
+                System.out.println("Goodbye!");
+                break;
+            } else {
+                System.out.println("Invalid role selection.");
+            }
         }
+
         scanner.close();
     }
 
